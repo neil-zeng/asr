@@ -42,7 +42,7 @@ model:                                    # Model architecture
     dropout: [0,0]
     layer_norm: [False,False]
     proj: [True,True]                     # Linear projection + Tanh after each rnn layer
-    sample_rate: [1,1]
+    sample_rate: [3,1]                    # 大于1, 才会做 Down Sampling
     sample_style: 'drop'                  # 'drop'/'concat'
   attention:
     mode: 'loc'                           # 'dot'/'loc'
