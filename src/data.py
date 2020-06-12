@@ -70,6 +70,8 @@ def create_dataset(tokenizer, ascending, name, path, bucketing, batch_size,
         from corpus.librispeech import LibriDataset as Dataset
     elif name.lower() == "dlhlp":
         from corpus.dlhlp import DlhlpDataset as Dataset
+    elif name.lower() == "sample_100":
+        from corpus.dlhlp import DlhlpDataset as Dataset
     else:
         raise NotImplementedError
 
