@@ -4,8 +4,6 @@ from os.path import join, getsize
 from joblib import Parallel, delayed
 from torch.utils.data import Dataset
 
-timer = time.time
-
 # Additional (official) text src provided
 OFFICIAL_TXT_SRC = ['librispeech-lm-norm.txt']
 # Remove longest N sentence in librispeech-lm-norm.txt
