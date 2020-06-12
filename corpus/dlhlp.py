@@ -3,6 +3,9 @@ from pathlib import Path
 from os.path import join, getsize
 from joblib import Parallel, delayed
 from torch.utils.data import Dataset
+import time
+
+timer = time.time
 
 # Additional (official) text src provided
 OFFICIAL_TXT_SRC = ['librispeech-lm-norm.txt']
@@ -102,6 +105,7 @@ class DlhlpTextDataset(Dataset):
             del self.text[:REMOVE_TOP_N_TXT]
 
     def __getitem__(self, index):
+        start_time = timer()
         if self.bucket_size > 1:
             index = min(len(self.text)-self.bucket_size, index)
             if self.encode_on_fly:
@@ -109,10 +113,12 @@ class DlhlpTextDataset(Dataset):
                     if type(self.text[i]) is str:
                         self.text[i] = self.tokenizer.encode(self.text[i])
             # Return a bucket
+            print(timer() - start_time)
             return self.text[index:index+self.bucket_size]
         else:
             if self.encode_on_fly and type(self.text[index]) is str:
                 self.text[index] = self.tokenizer.encode(self.text[index])
+            print(timer() - start_time)
             return self.text[index]
 
     def __len__(self):
